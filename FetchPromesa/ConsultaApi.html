@@ -13,11 +13,11 @@
             document.getElementById('boton').addEventListener('click',function() {
             hacerPeticion();
              });
-
             function hacerPeticion() {
-            fetch("http://allaboutfrogs.org/funstuff/randomfrog.html")
+            fetch("https://random.dog/woof.json")
             .then(respuesta => respuesta.json())
             .then(datos => document.getElementById('imagen').src=datos.url)
+        //.then(datos => document.getElementById('imagen').src=Object.values(datos)[0].downloadurl)
             }
         </script>
     </body>
