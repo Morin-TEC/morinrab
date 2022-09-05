@@ -184,3 +184,40 @@ Se trata de un método HTTP de petición muy interesante, ya que permite obtener
 ​
 - 451 Unavailable For Legal Reasons (en-US)
     El usuario solicita un recurso ilegal, como alguna página web censurada por algún gobierno. 
+
+
+## 500-599
+
+- 500 Error Internal server error
+  Es el código de estado HTTP más común, este significa que ha sucedido un error al intentar acceder al servidor, pero no se puede dar mas detalles sobre lo que ha ocurrido.
+
+- 501 No implementado
+  Indica que el servidor no soporta la funcionalidad necesaria para satisfacer la solicitud. Es la respuesta adecuada cuando el servidor no reconoce el método de solicitud y no es capaz de soportarlo para ningún recurso.
+
+- 502 Bad Gateway 
+  Indica que el servidor, mientras actuaba como una puerta de enlace o proxy, recibió una respuesta no válida del servidor ascendente.
+
+- 503 Servicio No Disponible
+  Informa de la incapacidad del servidor para procesar una petición y el mensaje que se envía es “service unavailable” o, lo que es lo mismo, “servicio no disponible”, que le señala al cliente que el servidor está desconectado momentáneamente.
+
+- 504 Gateway Timeout
+  Indica que tu servidor no ha recibido la respuesta que esperaba de otro servidor intermedio al intentar acceder a un sitio web o completar otra solicitud.
+
+- 505 HTTP Version Not Supported
+  Nos está indicando es que la versión HTTP no es compatible. Este fallo nos viene a decir que el servidor no puede comunicarse con el cliente por cualquier motivo, ya sea una URL incorrecta, un problema en la conexión a Internet o un cliente desactualizado.
+
+- 506 Variant Also Negotiates
+  El servidor tiene un error de configuración interno: el recurso de la variante elegida está configurado para participar en la negociación de contenido transparente por sí mismo, y por lo tanto no es un punto final adecuado en el proceso de negociación.
+
+- 507 Insufficient Storage
+  El método no se ha podido realizar en el recurso porque el servidor no puede almacenar la representación necesaria para completar con éxito la solicitud.
+
+- 508 Resource Limit Is Reached
+  Este mensaje de error o advertencia indica que el limite de recursos fue superado y es mostrado cuando la cuenta de Hosting esta excediendo los recursos asignados y adquiridos en el servicio.
+
+- 509 Bandwith Limit Exceeded
+  Si recibes este error, tu sitio web está utilizando más ancho de banda del que permite tu plan de alojamiento. El ancho de banda se refiere a la cantidad de datos que tu sitio puede transferir a sus visitantes en un periodo determinado.
+
+- 510 Not Extended
+  Cuando el servidor web no soporta la extensión adjuntada a la solicitud HTTP recibida, producirá este error 510. Lo más probable es que necesitemos actualizar el servidor web porque haya quedado obsoleto.
+  
