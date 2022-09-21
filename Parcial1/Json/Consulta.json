@@ -1,0 +1,7 @@
+
+    {"pokemon":{
+        "100" : { "Nombre":"Squirtle","Tipo":"Agua"},
+        "200" : { "Nombre":"Pikachu","Tipo":"Electrico"},
+        "300" : { "Nombre":"Charmander","Tipo":"Fuego"}
+    }
+}
