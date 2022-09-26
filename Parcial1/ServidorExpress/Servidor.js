@@ -1,16 +1,23 @@
 const express = require('express');
 const cors = require('cors');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
 
 const app = express()
 app.use(cors({origin:"http://localhost"}))
+
 app.use(express.text())
 app.use(express.json())
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.use((req,res,next) =>{
-    console.log("Primera funcion middiware")
+    console.log("Primera funcion middleware")
     next()
 },(req,res,next) =>{
-    console.log("Segunda funcion middiware")
+    console.log("Segunda funcion middleware")
     next()
 });
 
