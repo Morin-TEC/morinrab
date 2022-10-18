@@ -6,7 +6,7 @@ app.use(express.text())
 app.use(express.json())
 
 
-app.get('/:id',(req,res) => {
+app.get('/:ID',(req,res) => {
 
 var connection = mysql.createConnection({
   host     : '127.0.0.1',
@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 })
 connection.connect();
  
-connection.query('SELECT * FROM videojuego', function (error, results, fields) {
+connection.query('SELECT * FROM videojuego WHERE ID = ' + req.params.ID, function (error, results, fields) {
   if (error) throw error;
  // console.log(results);
   res.send(results)});
