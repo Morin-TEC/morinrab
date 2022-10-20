@@ -22,7 +22,7 @@ connection.query('SELECT * FROM videojuego WHERE ID = ' + req.params.ID, functio
   res.send(results)});
 connection.end();
 });
- 
+
 app.listen(8082,()=>{
   console.log('Server express 8082 escuchando correctamente')
 });
