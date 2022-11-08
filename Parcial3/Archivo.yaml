@@ -1,0 +1,8 @@
+pokemon:
+  100: Squirtle
+  200: Pikachu
+  300: Charmander
+  400:
+    - Electrico
+    - Pichu
+    - "Generacion 2"
