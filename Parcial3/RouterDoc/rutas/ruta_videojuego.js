@@ -5,9 +5,12 @@ var router= express.Router()
 
 /**
  * @swagger
- * /:
+ * /videojuego:
  *   get:
  *     description: Mira todos los videojuegos disponibles!
+ *     responses:
+ *          200:
+ *            description: Returns a mysterious string.
  */
 router.get('', (req, res) => {
     var connection = MySQL.getConnection();
@@ -16,7 +19,15 @@ router.get('', (req, res) => {
     })
   });
 
-
+/**
+ * @swagger
+ * /ID:
+ *   get:
+ *     description: Escoge el videojuego por su ID
+ *     responses:
+ *          200:
+ *            description: Returns a mysterious string.
+ */
 router.get('/:ID', (req, res) => {
     var connection = MySQL.getConnection();
     MySQL.selectWhere(connection,req.params.ID).then(function(results){
@@ -24,6 +35,15 @@ router.get('/:ID', (req, res) => {
     })
   });
 
+/**
+ * @swagger
+ * /agregar:
+ *   post:
+ *     description: Agrega un videojuego
+ *     responses:
+ *          200:
+ *            description: Returns a mysterious string.
+ */
 router.post('/agregar',(req,res)=> {
     let videojuego = {
     "inputTituloVideojuego" : req.body.inputTituloVideojuego,
@@ -38,6 +58,15 @@ router.post('/agregar',(req,res)=> {
     })
   });
 
+/**
+ * @swagger
+ * /modificar:
+ *   patch:
+ *     description: Modifica los datos del videojuego.
+ *     responses:
+ *          200:
+ *            description: Returns a mysterious string.
+ */  
 router.patch('/modificar',(req,res)=> {
     let videojuego = {
       "id" : req.body.id,
@@ -52,7 +81,16 @@ router.patch('/modificar',(req,res)=> {
         res.send(results)
     })
   });
- 
+
+/**
+ * @swagger
+ * /eliminar:
+ *   delete:
+ *     description: Elimina un videojuego
+ *     responses:
+ *          200:
+ *            description: Returns a mysterious string.
+ */  
 router.delete('/eliminar',(req,res)=> {
     let ID = req.body.ID;
   
