@@ -23,7 +23,7 @@ describe('Inserta un Pokemon: ',()=>{
     it('deberia insertar un Pokémon', (done) => {
         chai.request(url)                                                   
             .post('/pokemon/agregar')                       
-            .send({ID:"8",Nombre:"Eevee", Tipo:"Normal", Habilidad:"Reproduccion", Generacion:"Primera"})                       
+            .send({ID:"6",Nombre:"Meowth", Tipo:"Normal", Habilidad:"Reproduccion", Generacion:"Primera"})                       
             .end( function(err,res){
                 expect(res).to.have.status(200);
                 expect(res.text).to.be.a('string');
@@ -35,7 +35,7 @@ describe('Inserta un Pokemon: ',()=>{
 describe('Busca un Pokemon con su ID', () => {
     it('Deberia de obtener un Pokemon', (done) => {
       chai.request(url)
-        .get('/pokemon/2')
+        .get('/pokemon/5')
         .end((err, res) => {
           chai.expect(res).to.have.status(200);
           chai.expect(res.body).to.be.an('array');
@@ -54,10 +54,10 @@ describe('Actualiza un Pokemon', () => {
     chai.request(url)
         .patch('/pokemon/modificar')
         .send({
-        ID: '3',
-        Nombre: 'Pichu',
-        Tipo: 'Electrico',
-        Habilidad: 'Rayos',
+        ID: '7',
+        Nombre: 'Charmander',
+        Tipo: 'Fuego',
+        Habilidad: 'Ascuas',
         Generacion: 'Primera'
         })
         .end((err, res) => {
@@ -69,7 +69,7 @@ describe('Actualiza un Pokemon', () => {
 });
 
 describe('Se borra Pokemon', () => {
-    let ID=6;
+    let ID=2;
     it('Se elimina los datos del Pokemon', (done) => {
     chai
         .request(url)
