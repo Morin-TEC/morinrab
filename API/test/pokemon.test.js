@@ -9,7 +9,7 @@ const url= 'http://localhost:8082';
 describe('Obtiene Pokemon: ',()=>{
     it('Deberia obtener todos los Pokémon', (done) => {
         chai.request(url)
-            .get('/')
+            .get('/pokemon')
             .send()
             .end( function(err,res){
                     expect(res).to.have.status(200);
@@ -22,11 +22,11 @@ describe('Obtiene Pokemon: ',()=>{
 describe('Inserta un Pokemon: ',()=>{
     it('deberia insertar un Pokémon', (done) => {
         chai.request(url)                                                   
-            .post('/agregar')                       
-            .send({Nombre:"Pichu", Tipo:"Electrico", Habilidad:"Trueno", Generacion:"Segunda"})                       
+            .post('/pokemon/agregar')                       
+            .send({ID:"8",Nombre:"Eevee", Tipo:"Normal", Habilidad:"Reproduccion", Generacion:"Primera"})                       
             .end( function(err,res){
                 expect(res).to.have.status(200);
-            //    expect(res.text).to.be.a('string');
+                expect(res.text).to.be.a('string');
                 done();
             });      
     });
@@ -35,7 +35,7 @@ describe('Inserta un Pokemon: ',()=>{
 describe('Busca un Pokemon con su ID', () => {
     it('Deberia de obtener un Pokemon', (done) => {
       chai.request(url)
-        .get(`/pokemon/${id}`)
+        .get('/pokemon/2')
         .end((err, res) => {
           chai.expect(res).to.have.status(200);
           chai.expect(res.body).to.be.an('array');
@@ -51,28 +51,32 @@ describe('Busca un Pokemon con su ID', () => {
 
 describe('Actualiza un Pokemon', () => {
     it('Actuliza un dato del Pokémon seleccionado', (done) => {
-    chai
-        .request(url)
-        .patch(`/pokemon/${id}`)
+    chai.request(url)
+        .patch('/pokemon/modificar')
         .send({
-        Nombre: 'Magnemite',
+        ID: '3',
+        Nombre: 'Pichu',
+        Tipo: 'Electrico',
+        Habilidad: 'Rayos',
+        Generacion: 'Primera'
         })
         .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body).to.have.property('ID');
+        //expect(res).to.be.json;
         done();
         });
     });
 });
 
-describe('Borra un Pokemon', () => {
-    it('Borra un Pokemon segun su ID', (done) => {
+describe('Se borra Pokemon', () => {
+    let ID=6;
+    it('Se elimina los datos del Pokemon', (done) => {
     chai
         .request(url)
-        .delete(`/pokemon/${id}`)
+        .delete(`/pokemon/${ID}`)
         .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body).to.have.property('ID');
+        //expect(res.body).to.have.property('ID');
         done();
         });
     });

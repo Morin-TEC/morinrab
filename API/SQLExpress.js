@@ -20,7 +20,7 @@ const swaggerOptions = {
         ], 
         components: {
             schemas: {
-                Persona: {
+                Pokemon: {
                 type: "object",
                 properties: {
                     Nombre: {

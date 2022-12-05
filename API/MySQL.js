@@ -51,17 +51,17 @@ function createQuery(connection, pokemon)
     connection.connect();
     return new Promise(function(resolve,reject)
     {
-        query = `INSERT INTO pokemon(Nombre, Tipo, Habilidad, Generacion) 
-        VALUES ("${pokemon.Nombre}","${pokemon.Tipo}","${pokemon.Habilidad}","${pokemon.Generacion}")`
+        query = `INSERT INTO pokemon(ID, Nombre, Tipo, Habilidad, Generacion) 
+        VALUES ("${pokemon.ID}","${pokemon.Nombre}","${pokemon.Tipo}","${pokemon.Habilidad}","${pokemon.Generacion}")`
         connection.query(query, function(error, rows) 
         {
             if(error)
             {
-                reject(new Error("No insertado"))
+                reject(new Error(error))
             } 
             else 
             {
-                resolve("Se agrego campo con ID: "+rows.insertId)
+                resolve("Se agrego campo con ID: "+pokemon.ID)
             }
         });
     });
@@ -73,7 +73,7 @@ function modifyQuery(connection, pokemon)
     return new Promise(function(resolve,reject)
     {
         query = `UPDATE pokemon SET Nombre=?, Tipo=?, Habilidad=?, Generacion=? WHERE ID = ?`
-        connection.query(query,[pokemon.Nombre,pokemon.Tipo,pokemon.Habilidad,pokemon.Generacion,pokemon.id],function(error, results) 
+        connection.query(query,[pokemon.Nombre,pokemon.Tipo,pokemon.Habilidad,pokemon.Generacion,pokemon.ID],function(error, results) 
         {
             if(error)
             {
@@ -81,7 +81,7 @@ function modifyQuery(connection, pokemon)
             } 
             else 
             {
-                resolve("Se modifico: "+ results.affectedRows)
+                resolve("Se modifico: "+ pokemon.ID)
             }
         })
     });
@@ -100,7 +100,7 @@ function deleteQuery(connection, ID)
         } 
         else 
         {
-            resolve("Se elimino: "+ results.affectedRows)
+            resolve("Se elimino: "+ ID)
         }
     })
 });

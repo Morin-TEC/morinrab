@@ -20,20 +20,6 @@ var router= express.Router()
 
 /**
  * @swagger
- * /pokemon/index:
- *  get:
- *      description: Index
- *      responses:
- *          200:
- *              description: Informacion general
- */
-router.get('/index',(req,res)=> {
-    res.send('CRUD con router')
-});
-
-
-/**
- * @swagger
  * /pokemon/{id}:
  *   get:
  *     summary: Obtener un Pokémon por ID
@@ -60,29 +46,28 @@ router.get('/index',(req,res)=> {
   });
 
 
-  /**
-   * @swagger
-   * /pokemon/agregar:
-   *   post:
-   *     tags:
-   *       - Pokemon
-   *     summary: Agrega un nuevo Pokémon
-   *     requestBody:
-   *       required:
-   *         - Nombre
-   *         - Tipo
-   *         - Habilidad
-   *         - Generacion
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Pokemon'
-   *     responses:
-   *       200:
-   *         description: Se registro de manera exitosa
-   */
+/**
+  * @swagger
+  * /pokemon/agregar:
+  *   post:
+  *     summary: Agrega un nuevo Pokemon
+  *     requestBody:
+  *       required:
+  *         - ID
+  *         - Nombre
+  *         - Tipo
+  *         - Habilidad
+  *       content:
+  *         application/json:
+  *           schema:
+  *             $ref: '#/components/schemas/pokemon'
+  *     responses:
+  *       200:
+  *         description: Se agrego Pokemon
+  */
 router.post('/agregar',(req,res)=> {
     let pokemon = {
+      "ID":req.body.ID,
     "Nombre" : req.body.Nombre,
     "Tipo" : req.body.Tipo,
     "Habilidad" : req.body.Habilidad,
@@ -95,40 +80,28 @@ router.post('/agregar',(req,res)=> {
     })
   });
 
-  /**
-   * @swagger
-   * /pokemon/modificar:
-   *   patch:
-   *     tags:
-   *       - Pokemon
-   *     summary: Actualiza un Pokémon
-   *     description: Actualiza los datos de un Pokémon
-   *     parameters:
-   *       - in: path
-   *         name: ID
-   *         description: ID del Pokémon para modificar
-   *         required: true
-   *         schema:
-   *           type: integer
-   *           format: int
-   *     requestBody:
-   *       required:
-   *         - ID
-   *         - Nombre
-   *         - Tipo
-   *         - Habilidad
-   *         - Generacion
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/pokemon'
-   *     responses:
-   *       200:
-   *         description: Fue modificado con éxito
-   */
+/**
+  * @swagger
+  * /pokemon/modificar:
+  *   patch:
+  *     summary: Modifica un Pokemon
+  *     requestBody:
+  *       required:
+  *         - ID
+  *         - Nombre
+  *         - Tipo
+  *         - Habilidad
+  *       content:
+  *         application/json:
+  *           schema:
+  *             $ref: '#/components/schemas/pokemon'
+  *     responses:
+  *       200:
+  *         description: Se modifico un Pokemon
+  */
 router.patch('/modificar',(req,res)=> {
     let pokemon = {
-      "ID" : req.body.id,
+      "ID" : req.body.ID,
       "Nombre" : req.body.Nombre,
       "Tipo" : req.body.Tipo,
       "Habilidad" : req.body.Habilidad,
@@ -136,34 +109,36 @@ router.patch('/modificar',(req,res)=> {
       };
   
     var connection = MySQL.getConnection();
-    MySQL.modifyQuery(connection,pokemon).then(function(results){
+    var results = MySQL.modifyQuery(connection,pokemon).then(function(results){
         res.send(results)
     })
   });
 
 /**
  * @swagger
- * /pokemon/{id}:
+ * /pokemon/{ID}:
  *   delete:
- *     tags:
- *       - Pokemon
- *     summary: Elimina un Pokémon
- *     description: Elimina un Pokémon con su ID
+ *     summary: Eliminar un Pokémon
+ *     description: Eliminar un Pokémon con su ID.
  *     parameters:
- *         required:
- *         - ID
- *         schema:
- *           type: integer
- *           format: int32
+ *       - name: ID
+ *         in: path
+ *         description: ID
+ *         required: true
+ *         type: integer
  *     responses:
  *       200:
- *         description: Fue eliminado el Pokémon con éxito
+ *         description: Objeto
+ *         schema:
+ *           $ref: '#/components/schemas/pokemon'
+ *       404:
+ *         description: No fue encontrado
  */
- router.delete('/eliminar',(req,res)=> {
-    let ID = req.body.ID;
+ router.delete('/:ID',(req,res)=> {
+    let ID = req.params.ID;
     var connection = MySQL.getConnection();
-    MySQL.deleteQuery(connection,ID).then(function(results){
-        res.send(results)
+    var results = MySQL.deleteQuery(connection,ID).then(function(results){
+    res.send(results)
     })
 });
 
